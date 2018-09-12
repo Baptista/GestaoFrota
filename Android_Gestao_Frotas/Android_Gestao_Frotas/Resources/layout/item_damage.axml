@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6.0dp"
+        android:padding="8.0dp"
+        android:orientation="horizontal"
+        android:background="@drawable/item_general_background"
+        android:elevation="4.0dp">
+        <ImageView
+            android:id="@+id/ivImage"
+            android:scaleType="centerInside"
+            android:src="@drawable/nophoto"
+            android:layout_width="80dp"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:layout_marginStart="12.0dp"
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+                <EditText
+                    android:layout_width="0.8dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText1"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColor="@color/edge_red"
+                    android:hint="Descrição"
+                    android:background="@drawable/round_corner_red_border_background"
+                    android:layout_weight="1"
+                    android:layout_marginRight="0.0dp" />
+                <ImageButton
+                    android:id="@+id/myButtonCamera"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_camera"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent"
+                    android:layout_marginLeft="0.0dp"
+                    android:layout_marginRight="0.0dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/ButtonRemove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_remove"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent" />
+                <ImageButton
+                    android:id="@+id/myButtonFolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_open_folder"
+                    android:layout_gravity="right"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

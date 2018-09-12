@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <style name="AppTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+  
+  <style name="SplashTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowBackground">@drawable/splash_background_icon</item>
+  </style>
+
+  <style name="LoginTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+    <item name="colorControlActivated">@android:color/white</item>
+  </style>
+
+  <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo">
+  </style>
+  <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">#2196F3</item>
+    <item name="colorPrimaryDark">#1976D2</item>
+  </style>
+
+  <style name="UtilizadoresBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:background">#E7002F</item>
+  </style>
+
+  <style name="VehiclesTablLayoutStyle" parent="Widget.Design.TabLayout">
+    <item name="tabTextColor">@color/colorPrimary</item>
+    <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+    <item name="tabIndicatorColor">@color/colorAccent</item>
+    <item name="android:textStyle">bold</item>
+    <item name="tabTextAppearance">@style/TextAppearance.AppCompat.Subhead.Inverse</item>
+  </style>
+  
+</resources>

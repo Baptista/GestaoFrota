@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12.0dp">
+        <TextView
+            android:id="@+id/dialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8.0dp"
+            android:text="Adicionar Modelo"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText1"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="Modelo" />
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/dialogTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Marca"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4.0dp"
+            android:layout_marginEnd="4.0dp"
+            android:paddingStart="6.0dp"
+            android:popupBackground="@color/primary_dark_material_dark"
+            android:paddingEnd="6.0dp" />
+        <TextView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/dialogTitle3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Combustivel"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4.0dp"
+            android:layout_marginEnd="4.0dp"
+            android:paddingStart="6.0dp"
+            android:popupBackground="@color/primary_dark_material_dark"
+            android:paddingEnd="6.0dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            layout="@layout/toolbar" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tlVehicles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FEFEFE"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabIndicatorHeight="4.0dp"
+            style="@style/VehiclesTablLayoutStyle"
+            android:elevation="4.0dp" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpVehicles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </LinearLayout>
+    <View
+        android:id="@+id/vFabBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#48000000"
+        android:alpha="0"
+        android:visibility="gone" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabTypology"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/standard_23"
+        android:visibility="gone"
+        android:rotation="90"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_key" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/standard_23"
+        android:visibility="gone"
+        android:rotation="90"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_model" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/standard_23"
+        android:visibility="gone"
+        android:rotation="90"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_steering_wheel" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabVehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/standard_23"
+        android:visibility="gone"
+        android:rotation="90"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_car"
+        android:tooltipText="cenas" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_circle_plus" />
+</android.support.design.widget.CoordinatorLayout>

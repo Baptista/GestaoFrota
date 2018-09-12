@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6.0dp"
+        android:padding="8.0dp"
+        android:orientation="horizontal"
+        android:background="@drawable/item_general_background"
+        android:gravity="center_vertical"
+        android:elevation="4.0dp">
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="0.0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.15"
+            android:layout_marginEnd="8.0dp"
+            android:layout_marginStart="8.0dp"
+            android:scaleType="fitCenter"
+            android:tint="@color/edge_red"
+            android:src="@drawable/ic_model" />
+        <LinearLayout
+            android:layout_width="0.0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:layout_marginStart="12.0dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvModelo"
+                android:maxLines="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14.0sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <TextView
+                android:id="@+id/tvCombustivel"
+                android:maxLines="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4.0dp"
+                android:layout_marginBottom="4.0dp"
+                android:textSize="14.0sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+            <Android_Gestao_Frotas.CustomControls.ActiveTextView
+                android:id="@+id/tvState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14.0sp"
+                android:textStyle="normal"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+        <ImageButton
+            android:id="@+id/imgbtnOptions"
+            android:layout_width="0.0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_dots"
+            android:background="@android:color/transparent"
+            android:layout_alignParentRight="true" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llLoading"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:clickable="true"
+    android:background="#BF000000"
+    android:visibility="gone">
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="match_parent"
+        android:layout_height="88.8dp"
+        android:layout_marginTop="123.4dp"
+        android:layout_marginBottom="55.5dp"
+        android:paddingStart="22.0dp"
+        android:paddingEnd="22.0dp"
+        android:indeterminateOnly="true" />
+    <TextView
+        android:id="@+id/tvLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="23.0sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/white"
+        android:text="A carregar, por favor aquarde..."
+        android:gravity="center"
+        android:padding="12.0dp"/>
+    <Chronometer
+        android:id="@+id/chrLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="33.3dp"
+        android:textSize="23.0sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:visibility="invisible"/>
+    <TextView
+        android:id="@+id/tvTimes"
+        android:layout_width="match_parent"
+        android:layout_height="0.0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12.0dp"
+        android:textSize="12.0sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/white"
+        android:padding="12.0dp"/>
+</LinearLayout>

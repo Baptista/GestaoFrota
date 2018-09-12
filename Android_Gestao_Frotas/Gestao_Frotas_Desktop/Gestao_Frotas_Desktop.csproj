@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2F70419F-DDEC-46E4-97CD-DD0FE3766FBE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Gestao_Frotas_Desktop</RootNamespace>
+    <AssemblyName>Gestao_Frotas_Desktop</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>GestaoFrotasIcone.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="LoginMenu\FrmDisponibilizar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMenu\FrmDisponibilizar.Designer.cs">
+      <DependentUpon>FrmDisponibilizar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginMenu\FrmJustificacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMenu\FrmJustificacao.Designer.cs">
+      <DependentUpon>FrmJustificacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Marcacoes\FrmMarcacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Marcacoes\FrmMarcacoes.Designer.cs">
+      <DependentUpon>FrmMarcacoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NovoPedido\FrmNovoPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovoPedido\FrmNovoPedido.Designer.cs">
+      <DependentUpon>FrmNovoPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NovoPedido\FrmPedidoVeiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovoPedido\FrmPedidoVeiculo.Designer.cs">
+      <DependentUpon>FrmPedidoVeiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NovoPedido\FrmSobreposicao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NovoPedido\FrmSobreposicao.Designer.cs">
+      <DependentUpon>FrmSobreposicao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\FrmRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\FrmRelatorio.Designer.cs">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddDanoVeiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddDanoVeiculo.Designer.cs">
+      <DependentUpon>FrmAddDanoVeiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddMarca.Designer.cs">
+      <DependentUpon>FrmAddMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilizadores\FrmAddUtilizador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilizadores\FrmAddUtilizador.Designer.cs">
+      <DependentUpon>FrmAddUtilizador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddModelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddModelo.Designer.cs">
+      <DependentUpon>FrmAddModelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddTipologia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddTipologia.Designer.cs">
+      <DependentUpon>FrmAddTipologia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddVeiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmAddVeiculo.Designer.cs">
+      <DependentUpon>FrmAddVeiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginMenu\FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMenu\FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginMenu\FrmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMenu\FrmMenu.Designer.cs">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilizadores\FrmUtilizadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilizadores\FrmUtilizadores.Designer.cs">
+      <DependentUpon>FrmUtilizadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Veiculos\FrmVeiculos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Veiculos\FrmVeiculos.Designer.cs">
+      <DependentUpon>FrmVeiculos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LoginMenu\FrmDisponibilizar.resx">
+      <DependentUpon>FrmDisponibilizar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginMenu\FrmJustificacao.resx">
+      <DependentUpon>FrmJustificacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Marcacoes\FrmMarcacoes.resx">
+      <DependentUpon>FrmMarcacoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NovoPedido\FrmNovoPedido.resx">
+      <DependentUpon>FrmNovoPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NovoPedido\FrmPedidoVeiculo.resx">
+      <DependentUpon>FrmPedidoVeiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NovoPedido\FrmSobreposicao.resx">
+      <DependentUpon>FrmSobreposicao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\FrmRelatorio.resx">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmAddDanoVeiculo.resx">
+      <DependentUpon>FrmAddDanoVeiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmAddMarca.resx">
+      <DependentUpon>FrmAddMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilizadores\FrmAddUtilizador.resx">
+      <DependentUpon>FrmAddUtilizador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmAddModelo.resx">
+      <DependentUpon>FrmAddModelo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmAddTipologia.resx">
+      <DependentUpon>FrmAddTipologia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmAddVeiculo.resx">
+      <DependentUpon>FrmAddVeiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginMenu\FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginMenu\FrmMenu.resx">
+      <DependentUpon>FrmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilizadores\FrmUtilizadores.resx">
+      <DependentUpon>FrmUtilizadores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Veiculos\FrmVeiculos.resx">
+      <DependentUpon>FrmVeiculos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_gestao_frotas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core_Gestao_Frotas\Core_Gestao_Frotas.csproj">
+      <Project>{8A72A472-5857-4CCB-BD07-7F275D68BD21}</Project>
+      <Name>Core_Gestao_Frotas</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appointment.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car-front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key-silhouette-security-tool-interface-symbol-of-password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\curso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\entrega.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pendente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paintbrush.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car_test.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\modelo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tipologia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-silhouette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\writing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\steering %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\steering %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key-variant %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bus-school %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel-mark %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yesfoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no-photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GestaoFrotasIcone.ico" />
+    <None Include="Resources\calendar-check.png" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
