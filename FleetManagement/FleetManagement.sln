@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestFleet", "RestFleet\RestFleet.csproj", "{38E6DBBD-F8C8-4CF4-8C23-7EA07AEBBACB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleRestTest", "ConsoleRestTest\ConsoleRestTest.csproj", "{17C9B9F7-34F7-4411-864C-D9CECBE6EDF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{38E6DBBD-F8C8-4CF4-8C23-7EA07AEBBACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38E6DBBD-F8C8-4CF4-8C23-7EA07AEBBACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38E6DBBD-F8C8-4CF4-8C23-7EA07AEBBACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C9B9F7-34F7-4411-864C-D9CECBE6EDF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C9B9F7-34F7-4411-864C-D9CECBE6EDF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C9B9F7-34F7-4411-864C-D9CECBE6EDF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C9B9F7-34F7-4411-864C-D9CECBE6EDF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

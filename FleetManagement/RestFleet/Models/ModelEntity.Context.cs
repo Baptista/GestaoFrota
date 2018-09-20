@@ -20,6 +20,7 @@ namespace RestFleet.Models
         public gestaofrotasEntities()
             : base("name=gestaofrotasEntities")
         {
+            base.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
