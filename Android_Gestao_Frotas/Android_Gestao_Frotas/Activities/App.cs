@@ -16,7 +16,11 @@ using SQLite.Net.Platform.XamarinAndroid;
 
 namespace Android_Gestao_Frotas.Activities
 {
-    [Application]
+#if DEBUG
+    [Application(Debuggable = true)]
+#else
+    [Application(Debuggable = false)]
+#endif    
     public class App : Application
     {
         public static string DBPath { get {
