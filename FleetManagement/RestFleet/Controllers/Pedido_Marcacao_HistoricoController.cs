@@ -35,6 +35,134 @@ namespace RestFleet.Controllers
             return Ok(pedido_Marcacao_Historico);
         }
 
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaopendente
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaopendente")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaopendente()
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdEstadoPedidoMarcacao == 2).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaopendente?id=35
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaopendente")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaopendente(int id)
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdEstadoPedidoMarcacao == 2 && x.IdUtilizador == id).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidosdisponibilizar
+        [Route("api/Pedido_Marcacao_Historico/getpedidosdisponibilizar")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidosdisponibilizar()
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdEstadoPedidoMarcacao == 1 && x.DataFim < DateTime.Now).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaoaprovado()
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado?id=35
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaoaprovado(int id)
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdUtilizador == id).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado?id=35&idveiculo=35
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaoaprovado(int id, int idveiculo)
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdUtilizador == id & x.IdVeiculo == idveiculo).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaoemcurso
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaoemcurso")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaoemcurso()
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdEstadoPedidoMarcacao == 1).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
+        // GET: api/Pedido_Marcacao_Historico/getpedidomarcacaoemcurso?id=35
+        [Route("api/Pedido_Marcacao_Historico/getpedidomarcacaoemcurso")]
+        [ResponseType(typeof(Pedido_Marcacao_Historico))]
+        [HttpGet]
+        public IHttpActionResult getpedidomarcacaoemcurso(int id)
+        {
+            List<Pedido_Marcacao_Historico> pedido_Marcacao_Historico = db.Pedido_Marcacao_Historico.Where(x => x.IdEstadoPedidoMarcacao == 1 && x.IdUtilizador == 1).ToList();
+
+            if (pedido_Marcacao_Historico == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(pedido_Marcacao_Historico);
+        }
+
         // PUT: api/Pedido_Marcacao_Historico/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPedido_Marcacao_Historico(int id, Pedido_Marcacao_Historico pedido_Marcacao_Historico)

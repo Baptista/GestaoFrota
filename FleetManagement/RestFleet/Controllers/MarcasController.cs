@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using RestFleet.Mappers;
 using RestFleet.Models;
+using static RestFleet.Mappers.MapperJson;
 
 namespace RestFleet.Controllers
 {
@@ -83,6 +85,46 @@ namespace RestFleet.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = marca.IdMarca }, marca);
+        }
+
+        // POST: api/Marcas/AdicionarMarca
+        [Route("api/Marcas/AdicionarMarca")]
+        [ResponseType(typeof(Marca))]
+        public IHttpActionResult AdicionarMarca(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<BrandJson>(jsontxt);
+
+            var marca = MapperApp.MarcaAppToRest(a);
+
+            db.Marcas.Add(marca);
+            db.SaveChanges();
+
+            return Ok(db.Marcas.OrderByDescending(u => u.IdMarca).FirstOrDefault());
+            //return CreatedAtRoute("DefaultApi", new { id = a.IdMarca }, a);
+        }
+
+        // POST: api/Marcas/EditarMarca
+        [Route("api/Marcas/EditarMarca")]
+        [ResponseType(typeof(Marca))]
+        public IHttpActionResult EditarMarca(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<BrandJson>(jsontxt);
+
+            var marca = MapperApp.MarcaAppToRest(a);
+
+            //var result = db.Marcas.SingleOrDefault(b => b.IdMarca == marca.IdMarca);
+            ////db.Marcas.Add
+            //if (result != null)
+            //{
+            //    result = marca;
+            //    db.SaveChanges();
+            //}
+            db.spAlteraMarca(marca.IdMarca, marca.Descricao);
+
+            return Ok(db.Marcas.SingleOrDefault(b => b.IdMarca == marca.IdMarca));
+            //return CreatedAtRoute("DefaultApi", new { id = a.IdMarca }, a);
         }
 
         // DELETE: api/Marcas/5

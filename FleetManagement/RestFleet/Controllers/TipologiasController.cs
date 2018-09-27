@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using RestFleet.Mappers;
 using RestFleet.Models;
+using static RestFleet.Mappers.MapperJson;
 
 namespace RestFleet.Controllers
 {
@@ -83,6 +85,45 @@ namespace RestFleet.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = tipologia.IdTipologia }, tipologia);
+        }
+
+        // POST: api/Tipologias/AdicionarTipologia
+        [Route("api/Tipologias/AdicionarTipologia")]
+        [ResponseType(typeof(Tipologia))]
+        public IHttpActionResult AdicionarTipologia(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<TypologyJson>(jsontxt);
+
+            var tipologia = MapperApp.TipologiaAppToRest(a);
+
+            db.Tipologias.Add(tipologia);
+            db.SaveChanges();
+
+            return Ok(db.Tipologias.OrderByDescending(u => u.IdTipologia).FirstOrDefault());
+            //return CreatedAtRoute("DefaultApi", new { id = tipologia.IdTipologia }, tipologia);
+        }
+
+        // POST: api/Tipologias/EditarTipologia
+        [Route("api/Tipologias/EditarTipologia")]
+        [ResponseType(typeof(Tipologia))]
+        public IHttpActionResult EditarTipologia(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<TypologyJson>(jsontxt);
+
+            var tipologia = MapperApp.TipologiaAppToRest(a);
+
+            //var result = db.Tipologias.SingleOrDefault(b => b.IdTipologia == tipologia.IdTipologia);
+            //if (result != null)
+            //{
+            //    result = tipologia;
+            //    db.SaveChanges();
+            //}
+            db.spAlteraTipologia(tipologia.IdTipologia, tipologia.Descricao);
+
+            return Ok(db.Tipologias.SingleOrDefault(b => b.IdTipologia == tipologia.IdTipologia));
+            //return CreatedAtRoute("DefaultApi", new { id = tipologia.IdTipologia }, tipologia);
         }
 
         // DELETE: api/Tipologias/5

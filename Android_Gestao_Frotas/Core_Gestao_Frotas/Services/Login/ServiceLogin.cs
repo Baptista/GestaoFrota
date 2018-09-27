@@ -1,4 +1,6 @@
-﻿using Core_Gestao_Frotas.Services.Interfaces;
+﻿using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
+using Core_Gestao_Frotas.Services.Interfaces;
 using Core_Gestao_Frotas.Services.Models;
 using Newtonsoft.Json;
 using System;
@@ -14,13 +16,21 @@ namespace Core_Gestao_Frotas.Services.Login
     {
         public async Task<string> ExecuteLogin(string username, string password)
         {
-            var url = GetUrl(UrlMethodType.GetLoginID);
+            var url = GetUrl(UrlMethodType.GetWebLoginId);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("username", username));
-            postData.Add(new KeyValuePair<string, string>("password", password));
+            var userlogin = new LoginJson
+            {
+                User = username,
+                Password = password
+            };
 
-            var content = await PostAsync(url, postData);
+            var jsontxt = MapperWeb.ToJson(userlogin);
+
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("username", username));
+            //postData.Add(new KeyValuePair<string, string>("password", password));
+
+            var content = await PostAsyncWeb(url, jsontxt);
 
             return content;
         }
@@ -45,7 +55,7 @@ namespace Core_Gestao_Frotas.Services.Login
 
         public async Task<string> GetUsers()
         {
-            var url = GetUrl(UrlMethodType.GetUsers);
+            var url = GetUrl(UrlMethodType.GetWebUsers);
             
             var content = await GetAsync(url);
 

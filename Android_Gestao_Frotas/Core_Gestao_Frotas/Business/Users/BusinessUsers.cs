@@ -30,8 +30,14 @@ namespace Core_Gestao_Frotas.Business.Users
             var usersJson = await serviceUsers.GetUsers();
             var profilesJson = await serviceUsers.GetProfiles();
 
-            var usersPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(usersJson);
-            var profilesPersistence = JsonConvert.DeserializeObject<List<ProfilePersistence>>(profilesJson);
+            var usersweb = JsonConvert.DeserializeObject<List<WebUser>>(usersJson);
+            var profilesweb = JsonConvert.DeserializeObject<List<WebProfile>>(profilesJson);
+
+            var usersPersistence = MapperWeb.WebUserListToPersistence(usersweb);
+            var profilesPersistence = MapperWeb.WebProfileToPersistence(profilesweb);
+
+            //var usersPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(usersJson);
+            //var profilesPersistence = JsonConvert.DeserializeObject<List<ProfilePersistence>>(profilesJson);
 
             var usersResult = repositoryUser.InsertAll(usersPersistence);
             var profileResult = repositoryProfile.InsertAll(profilesPersistence);

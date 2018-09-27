@@ -1,4 +1,5 @@
 ﻿using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
 using Core_Gestao_Frotas.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,17 +27,27 @@ namespace Core_Gestao_Frotas.Services.VehicleInfo
 
         public async Task<string> NewVehicle(Vehicle vehicle)
         {
-            var url = GetUrl(UrlMethodType.AddVehicle);
-            
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("idmodelo", $"{vehicle.Model.Id}"));
-            postData.Add(new KeyValuePair<string, string>("idtipologia", $"{vehicle.Typology.Id}"));
-            postData.Add(new KeyValuePair<string, string>("idutilizador", vehicle.User.Id == BaseModel.Null ? "NULL" : $"{vehicle.User.Id}"));
-            postData.Add(new KeyValuePair<string, string>("Matricula", $"{vehicle.LicensePlate}"));
-            postData.Add(new KeyValuePair<string, string>("kmsiniciais", $"{vehicle.StartKms}"));
-            postData.Add(new KeyValuePair<string, string>("kmscontrato", $"{vehicle.ContractKms}"));
+            //var url = GetUrl(UrlMethodType.AddVehicle);
 
-            var content = await PostAsync(url, postData);
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("idmodelo", $"{vehicle.Model.Id}"));
+            //postData.Add(new KeyValuePair<string, string>("idtipologia", $"{vehicle.Typology.Id}"));
+            //postData.Add(new KeyValuePair<string, string>("idutilizador", vehicle.User.Id == BaseModel.Null ? "NULL" : $"{vehicle.User.Id}"));
+            //postData.Add(new KeyValuePair<string, string>("Matricula", $"{vehicle.LicensePlate}"));
+            //postData.Add(new KeyValuePair<string, string>("kmsiniciais", $"{vehicle.StartKms}"));
+            //postData.Add(new KeyValuePair<string, string>("kmscontrato", $"{vehicle.ContractKms}"));
+
+            //var content = await PostAsync(url, postData);
+
+            //return content;
+
+            var url = GetUrl(UrlMethodType.AddWebVehicle);
+
+
+            var jsontxt = MapperWeb.ToJson(vehicle);
+
+            var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
             return content;
         }

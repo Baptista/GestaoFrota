@@ -1,5 +1,6 @@
 ﻿using Core_Gestao_Frotas.Business.Interfaces;
 using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
 using Core_Gestao_Frotas.Persistence.Interfaces;
 using Core_Gestao_Frotas.Persistence.Models;
 using Core_Gestao_Frotas.Persistence.Repositories.Configurations;
@@ -31,20 +32,31 @@ namespace Core_Gestao_Frotas.Business.Splash
                 IRepositoryPermission repositoryPermission = new RepositoryPermission();
                 IRepositoryProfilePermission repositoryProfilePermission = new RepositoryProfilePermission();
 
-                var configurationsResponse = await serviceSplash.GetConfigutations();
-                var profilesResponse = await serviceSplash.GetProfiles();
-                var permissionsResponse = await serviceSplash.GetPermissions();
-                var profilePermissionResponse = await serviceSplash.GetProfilePermissions();
+                var ConfigutationsJson = await serviceSplash.GetConfigutations();
+                var webConfigutations = JsonConvert.DeserializeObject<List<WebConfiguration>>(ConfigutationsJson);
+                var ConfigutationsPersistence = MapperWeb.WebConfigurationToPersistence(webConfigutations);
 
-                var configurations = JsonConvert.DeserializeObject<List<ConfigurationPersistence>>(configurationsResponse);
-                var profiles = JsonConvert.DeserializeObject<List<ProfilePersistence>>(profilesResponse);
-                var permissions = JsonConvert.DeserializeObject<List<PermissionPersistence>>(permissionsResponse);
-                var profilePermissions = JsonConvert.DeserializeObject<List<ProfilePermissionPersistence>>(profilePermissionResponse);
+                var profilesJson = await serviceSplash.GetProfiles();
+                var webprofiles = JsonConvert.DeserializeObject<List<WebProfile>>(profilesJson);
+                var profilesPersistence = MapperWeb.WebProfileToPersistence(webprofiles);
 
-                var configResult = await repositoryConfiguration.InsertAll(configurations);
-                var profileResult = await repositoryProfile.InsertAll(profiles);
-                var permissionResult = await repositoryPermission.InsertAll(permissions);
-                var profilePermissionResult = await repositoryProfilePermission.InsertAll(profilePermissions);
+                var PermissionsJson = await serviceSplash.GetPermissions();
+                var webPermissions = JsonConvert.DeserializeObject<List<WebPermission>>(PermissionsJson);
+                var PermissionsPersistence = MapperWeb.WebPermissionToPersistence(webPermissions);
+
+                var ProfilePermissionsJson = await serviceSplash.GetProfilePermissions();
+                var webProfilePermissions = JsonConvert.DeserializeObject<List<WebProfilePermission>>(ProfilePermissionsJson);
+                var ProfilePermissionsPersistence = MapperWeb.WebProfilePermissionToPersistence(webProfilePermissions);
+
+                //var configurations = JsonConvert.DeserializeObject<List<ConfigurationPersistence>>(configurationsResponse);
+                //var profiles = JsonConvert.DeserializeObject<List<ProfilePersistence>>(profilesResponse);
+                //var permissions = JsonConvert.DeserializeObject<List<PermissionPersistence>>(permissionsResponse);
+                //var profilePermissions = JsonConvert.DeserializeObject<List<ProfilePermissionPersistence>>(profilePermissionResponse);
+
+                var configResult = await repositoryConfiguration.InsertAll(ConfigutationsPersistence);
+                var profileResult = await repositoryProfile.InsertAll(profilesPersistence);
+                var permissionResult = await repositoryPermission.InsertAll(PermissionsPersistence);
+                var profilePermissionResult = await repositoryProfilePermission.InsertAll(ProfilePermissionsPersistence);
 
                 return true;
             }

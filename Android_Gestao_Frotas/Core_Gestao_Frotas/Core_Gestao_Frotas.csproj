@@ -50,6 +50,7 @@
     <Compile Include="Business\Interfaces\IBusinessVehicleInfo.cs" />
     <Compile Include="Business\ModelInfo\BusinessModelInfo.cs" />
     <Compile Include="Business\Models\Enumerables.cs" />
+    <Compile Include="Business\Models\Web.cs" />
     <Compile Include="Business\NewPassword\BusinessNewPassword.cs" />
     <Compile Include="Business\NewRequest\BusinessNewRequest.cs" />
     <Compile Include="Business\Profiles\BusinessProfile.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Mappers\MapperUser.cs" />
     <Compile Include="Mappers\MapperVehicle.cs" />
     <Compile Include="Mappers\MapperVehicleHistory.cs" />
+    <Compile Include="Mappers\MapperWeb.cs" />
     <Compile Include="Persistence\BaseRepository.cs" />
     <Compile Include="Persistence\Interfaces\IRepositoryBrand.cs" />
     <Compile Include="Persistence\Interfaces\IRepositoryConfiguration.cs" />

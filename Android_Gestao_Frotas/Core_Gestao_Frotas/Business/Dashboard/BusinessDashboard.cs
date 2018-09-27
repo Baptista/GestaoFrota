@@ -197,7 +197,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             IRepositoryModel repositoryModel = new RepositoryModel();
 
             var requestsActiveJson = await serviceDashboard.GetRequestsActiveAll();
-            var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
+            
+            var WebrequestsActive = JsonConvert.DeserializeObject<List<WebRequestHistory>>(requestsActiveJson);
+            var requestsHistoryPersistence = MapperWeb.WebRequestHistoriesToPersistence(WebrequestsActive);
+            //var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
             var requestsHistory = MapperRequestHistory.ToModel(requestsHistoryPersistence);
 
             for (int i = 0; i <= requestsHistory.Count - 1; i++)
@@ -226,7 +229,11 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             IRepositoryModel repositoryModel = new RepositoryModel();
 
             var requestsActiveJson = await serviceDashboard.GetRequestsActiveUser(user);
-            var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
+
+            var WebrequestsActive = JsonConvert.DeserializeObject<List<WebRequestHistory>>(requestsActiveJson);
+            var requestsHistoryPersistence = MapperWeb.WebRequestHistoriesToPersistence(WebrequestsActive);
+
+            //var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
             var requestsHistory = MapperRequestHistory.ToModel(requestsHistoryPersistence);
 
             for (int i = 0; i <= requestsHistory.Count - 1; i++)
@@ -255,7 +262,11 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             IRepositoryModel repositoryModel = new RepositoryModel();
 
             var requestsActiveJson = await serviceDashboard.GetRequestsActiveUserVehicle(user,vehicle);
-            var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
+
+            var WebrequestsActive = JsonConvert.DeserializeObject<List<WebRequestHistory>>(requestsActiveJson);
+            var requestsHistoryPersistence = MapperWeb.WebRequestHistoriesToPersistence(WebrequestsActive);
+
+            //var requestsHistoryPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestsActiveJson);
             var requestsHistory = MapperRequestHistory.ToModel(requestsHistoryPersistence);
 
             for (int i = 0; i <= requestsHistory.Count - 1; i++)
@@ -339,7 +350,9 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             IRepositoryRequestHistory repositoryRequestHistory = new RepositoryRequestHistory();
 
             var vehicleHistoryJson = await serviceDashboard.GetVehiclesHistory();
-            var vehicleHistoryPersistence = JsonConvert.DeserializeObject<List<VehicleDeliveryPersistence>>(vehicleHistoryJson);
+            var WebVehicleHistory = JsonConvert.DeserializeObject<List<WebVehicleDelivery>>(vehicleHistoryJson);
+            var vehicleHistoryPersistence = MapperWeb.WebVehicleDeliveryToPersistence(WebVehicleHistory);
+
             var vehicleHistory = MapperVehicleHistory.ToModel(vehicleHistoryPersistence);
 
             //for (int i = 0; i <= vehicleHistory.Count - 1; i++)
@@ -368,32 +381,55 @@ namespace Core_Gestao_Frotas.Business.Dashboard
                 IRepositoryDamageVehicle repositoryDamageVehicle = new RepositoryDamageVehicle();
                 IRepositoryDamageVehicleDocument repositoryDamageVehicleDocument = new RepositoryDamageVehicleDocument();
 
-                var fuelsJson = await serviceDashboard.GetFuels();
+                var FuelsJson = await serviceDashboard.GetFuels();
+                var webFuels = JsonConvert.DeserializeObject<List<WebFuel>>(FuelsJson);
+                var FuelsPersistence = MapperWeb.WebFuelToPersistence(webFuels);
+
                 var brandsJson = await serviceDashboard.GetBrands();
-                var typologiesJson = await serviceDashboard.GetTypologies();
-                var modelsJson = await serviceDashboard.GetModels();
-                var vehiclesJson = await serviceDashboard.GetVehicles();
-                var vehiclesHistoryJson = await serviceDashboard.GetVehiclesHistory();
-                var damagesVehicleJson = await serviceDashboard.GetDamagesVehicle();
-                var damageVehiclesDocumentsJson = await serviceDashboard.GetDamageVehicleDocuments();
+                var webBrands = JsonConvert.DeserializeObject<List<WebBrand>>(brandsJson);
+                var brandsPersistence = MapperWeb.WebBrandListToPersistence(webBrands);
 
-                var fuelsPersistence = JsonConvert.DeserializeObject<List<FuelPersistence>>(fuelsJson);
-                var brandsPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(brandsJson);
-                var typologiesPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(typologiesJson);
-                var modelsPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelsJson);
-                var vehiclesPersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehiclesJson);
-                var vehiclesHistoryPersistence = JsonConvert.DeserializeObject<List<VehicleDeliveryPersistence>>(vehiclesHistoryJson);
-                var damagesVehiclePersistence = JsonConvert.DeserializeObject<List<DamageVehiclePersistence>>(damagesVehicleJson);
-                var damageVehicleDocumentsPersistence = JsonConvert.DeserializeObject<List<DamageVehicleDocumentPersistence>>(damageVehiclesDocumentsJson);
+                var TypologiesJson = await serviceDashboard.GetTypologies();
+                var webTypologies = JsonConvert.DeserializeObject<List<WebTypology>>(TypologiesJson);
+                var TypologiesPersistence = MapperWeb.WebTypologyListToPersistence(webTypologies);
 
-                var fuelResult = await repositoryFuel.InsertAll(fuelsPersistence);
+                var ModelsJson = await serviceDashboard.GetModels();
+                var webModels = JsonConvert.DeserializeObject<List<WebModel>>(ModelsJson);
+                var ModelsPersistence = MapperWeb.WebModelListToPersistence(webModels);
+
+                var VehiclesJson = await serviceDashboard.GetVehicles();
+                var webVehicles = JsonConvert.DeserializeObject<List<WebVehicle>>(VehiclesJson);
+                var VehiclesPersistence = MapperWeb.WebVehicleListToPersistence(webVehicles);
+
+                var VehiclesHistorysJson = await serviceDashboard.GetVehiclesHistory();
+                var webVehiclesHistorys = JsonConvert.DeserializeObject<List<WebVehicleDelivery>>(VehiclesHistorysJson);
+                var VehiclesHistorysPersistence = MapperWeb.WebVehicleDeliveryToPersistence(webVehiclesHistorys);
+
+                var DamagesVehiclesJson = await serviceDashboard.GetDamagesVehicle();
+                var webDamagesVehicles = JsonConvert.DeserializeObject<List<WebDamageVehicle>>(DamagesVehiclesJson);
+                var DamagesVehiclesPersistence = MapperWeb.WebDamageVehicleToPersistence(webDamagesVehicles);
+
+                var GetDamageVehicleDocumentsJson = await serviceDashboard.GetDamageVehicleDocuments();
+                var webGetDamageVehicleDocuments = JsonConvert.DeserializeObject<List<WebDamageVehicleDocument>>(GetDamageVehicleDocumentsJson);
+                var DamageVehicleDocumentsPersistence = MapperWeb.WebDamageVehicleDocumentToPersistence(webGetDamageVehicleDocuments);
+
+                //var fuelsPersistence = JsonConvert.DeserializeObject<List<FuelPersistence>>(fuelsJson);
+                //var brandsPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(brandsJson);
+                //var typologiesPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(typologiesJson);
+                //var modelsPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelsJson);
+                //var vehiclesPersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehiclesJson);
+                //var vehiclesHistoryPersistence = JsonConvert.DeserializeObject<List<VehicleDeliveryPersistence>>(vehiclesHistoryJson);
+                //var damagesVehiclePersistence = JsonConvert.DeserializeObject<List<DamageVehiclePersistence>>(damagesVehicleJson);
+                //var damageVehicleDocumentsPersistence = JsonConvert.DeserializeObject<List<DamageVehicleDocumentPersistence>>(damageVehiclesDocumentsJson);
+
+                var fuelResult = await repositoryFuel.InsertAll(FuelsPersistence);
                 var brandResult = await repositoryBrand.InsertAll(brandsPersistence);
-                var typologyResult = await repositoryTypology.InsertAll(typologiesPersistence);
-                var modelResult = await repositoryModel.InsertAll(modelsPersistence);
-                var vehicleResult = await repositoryVehicle.InsertAll(vehiclesPersistence);
-                var vehicleHistoryResult = await repositoryVehicleHistory.InsertAll(vehiclesHistoryPersistence);
-                var damagesVehicleResult = await repositoryDamageVehicle.InsertAll(damagesVehiclePersistence);
-                var damageVehicleDocumentResult = await repositoryDamageVehicleDocument.InsertAll(damageVehicleDocumentsPersistence);
+                var typologyResult = await repositoryTypology.InsertAll(TypologiesPersistence);
+                var modelResult = await repositoryModel.InsertAll(ModelsPersistence);
+                var vehicleResult = await repositoryVehicle.InsertAll(VehiclesPersistence);
+                var vehicleHistoryResult = await repositoryVehicleHistory.InsertAll(VehiclesHistorysPersistence);
+                var damagesVehicleResult = await repositoryDamageVehicle.InsertAll(DamagesVehiclesPersistence);
+                var damageVehicleDocumentResult = await repositoryDamageVehicleDocument.InsertAll(DamageVehicleDocumentsPersistence);
 
                 return true;
             }
@@ -415,23 +451,37 @@ namespace Core_Gestao_Frotas.Business.Dashboard
                 IRepositoryRequestJustification repositoryRequestJustification = new RepositoryRequestJustification();
                 IRepositoryRequestHistory repositoryRequestHistory = new RepositoryRequestHistory();
 
-                var requestJustificationTypesJson = await serviceDashboard.GetRequestJustificationTypes();
-                var requestStatesJson = await serviceDashboard.GetRequestStates();
-                var requestsJson = await serviceDashboard.GetRequests();
-                var requestJustificationsJson = await serviceDashboard.GetRequestJustifications();
-                var requestHistoriesJson = await serviceDashboard.GetRequestHistories();
+                var RequestJustificationTypesJson = await serviceDashboard.GetRequestJustificationTypes();
+                var webRequestJustificationTypes = JsonConvert.DeserializeObject<List<WebRequestJustificationType>>(RequestJustificationTypesJson);
+                var RequestJustificationTypesPersistence = MapperWeb.WebRequestJustificationTypeToPersistence(webRequestJustificationTypes);
 
-                var requestJustificationTypesPersistence = JsonConvert.DeserializeObject<List<RequestJustificationTypePersistence>>(requestJustificationTypesJson);
-                var requestStatesPersistence = JsonConvert.DeserializeObject<List<RequestStatePersistence>>(requestStatesJson);
-                var requestsPersistence = JsonConvert.DeserializeObject<List<RequestPersistence>>(requestsJson);
-                var requestJustificationsPersistence = JsonConvert.DeserializeObject<List<RequestJustificationPersistence>>(requestJustificationsJson);
-                var requestHistoriesPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestHistoriesJson);
+                var RequestStatesJson = await serviceDashboard.GetRequestStates();
+                var webRequestStates = JsonConvert.DeserializeObject<List<WebRequestState>>(RequestStatesJson);
+                var RequestStatesPersistence = MapperWeb.WebRequestStateToPersistence(webRequestStates);
 
-                var requestJustificationTypesResult = await repositoryRequestJustificationType.InsertAll(requestJustificationTypesPersistence);
-                var requestStatesResult = await repositoryRequestState.InsertAll(requestStatesPersistence);
-                var requestsResult = await repositoryRequest.InsertAll(requestsPersistence);
-                var requestJustificationsResult = await repositoryRequestJustification.InsertAll(requestJustificationsPersistence);
-                var requestHistoriesResult = await repositoryRequestHistory.InsertAll(requestHistoriesPersistence);
+                var RequestsJson = await serviceDashboard.GetRequests();
+                var webRequests = JsonConvert.DeserializeObject<List<WebRequest>>(RequestsJson);
+                var RequestsPersistence = MapperWeb.WebRequestToPersistence(webRequests);
+
+                var RequestJustificationsJson = await serviceDashboard.GetRequestJustifications();
+                var webRequestJustifications = JsonConvert.DeserializeObject<List<WebRequestJustification>>(RequestJustificationsJson);
+                var RequestJustificationsPersistence = MapperWeb.WebRequestJustificationToPersistence(webRequestJustifications);
+
+                var RequestHistorysJson = await serviceDashboard.GetRequestHistories();
+                var webRequestHistorys = JsonConvert.DeserializeObject<List<WebRequestHistory>>(RequestHistorysJson);
+                var RequestHistorysPersistence = MapperWeb.WebRequestHistoriesToPersistence(webRequestHistorys);
+
+                //var requestJustificationTypesPersistence = JsonConvert.DeserializeObject<List<RequestJustificationTypePersistence>>(requestJustificationTypesJson);
+                //var requestStatesPersistence = JsonConvert.DeserializeObject<List<RequestStatePersistence>>(requestStatesJson);
+                //var requestsPersistence = JsonConvert.DeserializeObject<List<RequestPersistence>>(requestsJson);
+                //var requestJustificationsPersistence = JsonConvert.DeserializeObject<List<RequestJustificationPersistence>>(requestJustificationsJson);
+                //var requestHistoriesPersistence = JsonConvert.DeserializeObject<List<RequestHistoryPersistence>>(requestHistoriesJson);
+
+                var requestJustificationTypesResult = await repositoryRequestJustificationType.InsertAll(RequestJustificationTypesPersistence);
+                var requestStatesResult = await repositoryRequestState.InsertAll(RequestStatesPersistence);
+                var requestsResult = await repositoryRequest.InsertAll(RequestsPersistence);
+                var requestJustificationsResult = await repositoryRequestJustification.InsertAll(RequestJustificationsPersistence);
+                var requestHistoriesResult = await repositoryRequestHistory.InsertAll(RequestHistorysPersistence);
 
                 return true;
             }
@@ -605,4 +655,5 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
         #endregion
     }
+
 }

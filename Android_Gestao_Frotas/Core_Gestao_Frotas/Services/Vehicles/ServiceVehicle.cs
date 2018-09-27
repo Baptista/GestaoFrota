@@ -1,4 +1,5 @@
 ﻿using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
 using Core_Gestao_Frotas.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace Core_Gestao_Frotas.Services.Vehicles
     {
         public async Task<String> GetBrands()
         {
-            var url = GetUrl(UrlMethodType.GetBrands);
+            //var url = GetUrl(UrlMethodType.GetBrands);
+            var url = GetUrl(UrlMethodType.GetWebBrands);
 
             var client = new HttpClient();
 
@@ -25,7 +27,8 @@ namespace Core_Gestao_Frotas.Services.Vehicles
 
         public async Task<String> GetFuels()
         {
-            var url = GetUrl(UrlMethodType.GetFuels);
+            //var url = GetUrl(UrlMethodType.GetFuels);
+            var url = GetUrl(UrlMethodType.GetWebFuels);
 
             var client = new HttpClient();
 
@@ -37,7 +40,9 @@ namespace Core_Gestao_Frotas.Services.Vehicles
 
         public async Task<String> GetModels()
         {
-            var url = GetUrl(UrlMethodType.GetModels);
+            //var url = GetUrl(UrlMethodType.GetModels);
+            var url = GetUrl(UrlMethodType.GetWebModels);
+
             var content = await GetAsync(url);
 
             return content;
@@ -45,7 +50,8 @@ namespace Core_Gestao_Frotas.Services.Vehicles
 
         public async Task<String> GetTypologys()
         {
-            var url = GetUrl(UrlMethodType.GetTypologies);
+            //var url = GetUrl(UrlMethodType.GetTypologies);
+            var url = GetUrl(UrlMethodType.GetWebTypologys);
 
             var client = new HttpClient();
 
@@ -57,7 +63,8 @@ namespace Core_Gestao_Frotas.Services.Vehicles
 
         public async Task<String> GetVehicles()
         {
-            var url = GetUrl(UrlMethodType.GetVehicles);
+            //var url = GetUrl(UrlMethodType.GetWebVehicles);
+            var url = GetUrl(UrlMethodType.GetWebVehicles);
 
             var client = new HttpClient();
 
@@ -69,111 +76,158 @@ namespace Core_Gestao_Frotas.Services.Vehicles
 
         public async Task<string> InsertBrand(Brand brand)
         {
-            var url = GetUrl(UrlMethodType.InsertBrand);
+            var url = GetUrl(UrlMethodType.InsertWebBrand);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("marca", brand.Description));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("marca", brand.Description));
+            //var content = new FormUrlEncodedContent(postData);
 
-            var content = new FormUrlEncodedContent(postData);
+            var jsontxt = MapperWeb.ToJson(brand);
 
             var client = new HttpClient();
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
+            //var result = await client.PostAsync(url, jsontxt);
+            var content = await PostAsyncWeb(url, jsontxt);
+            //var content2 = await result.Content.ReadAsStringAsync();
 
-            return content2;
+            return content;
         }
 
         public async Task<string> InsertModel(Model model)
         {
-            var url = GetUrl(UrlMethodType.InsertModel);
+            //var url = GetUrl(UrlMethodType.InsertModel);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("marca", model.Brand.Id.ToString()));
-            postData.Add(new KeyValuePair<string, string>("modelo", model.Description));
-            postData.Add(new KeyValuePair<string, string>("combustivel", model.Fuel.Id.ToString()));
+            ////var postData = new List<KeyValuePair<string, string>>();
+            ////postData.Add(new KeyValuePair<string, string>("marca", model.Brand.Id.ToString()));
+            ////postData.Add(new KeyValuePair<string, string>("modelo", model.Description));
+            ////postData.Add(new KeyValuePair<string, string>("combustivel", model.Fuel.Id.ToString()));
 
-            var content = new FormUrlEncodedContent(postData);
+            ////var content = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, content);
+            //var content2 = await result.Content.ReadAsStringAsync();
+
+            //return content2;
+            var url = GetUrl(UrlMethodType.InsertWebModel);
+
+
+            var jsontxt = MapperWeb.ToJson(model);
 
             var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
-
-            return content2;
+            return content;
         }
 
         public async Task<string> InsertTypology(Typology typology)
         {
-            var url = GetUrl(UrlMethodType.InsertTypology);
+            //var url = GetUrl(UrlMethodType.InsertTypology);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("tipologia", typology.Description));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("tipologia", typology.Description));
 
-            var content = new FormUrlEncodedContent(postData);
+            //var content = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, content);
+            //var content2 = await result.Content.ReadAsStringAsync();
+
+            //return content2;
+            var url = GetUrl(UrlMethodType.InsertWebTypology);
+
+
+            var jsontxt = MapperWeb.ToJson(typology);
 
             var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
-
-            return content2;
+            return content;
         }
 
         public async Task<string> UpdateBrand(Brand brand)
         {
-            var url = GetUrl(UrlMethodType.UpdateBrand);
+            //var url = GetUrl(UrlMethodType.UpdateBrand);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("idmarca", brand.Id.ToString()));
-            postData.Add(new KeyValuePair<string, string>("marca", brand.Description));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("idmarca", brand.Id.ToString()));
+            //postData.Add(new KeyValuePair<string, string>("marca", brand.Description));
 
-            var content = new FormUrlEncodedContent(postData);
+            //var content = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, content);
+            //var content2 = await result.Content.ReadAsStringAsync();
+
+            //return content2;
+            var url = GetUrl(UrlMethodType.UpdateWebBrand);
+
+
+            var jsontxt = MapperWeb.ToJson(brand);
 
             var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
-
-            return content2;
+            return content;
         }
 
         public async Task<string> UpdateModel(Model model)
         {
-            var url = GetUrl(UrlMethodType.UpdateModel);
+            //var url = GetUrl(UrlMethodType.UpdateModel);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("idmodelo", model.Id.ToString()));
-            postData.Add(new KeyValuePair<string, string>("modelo", model.Description));
-            postData.Add(new KeyValuePair<string, string>("marca", model.Brand.Id.ToString()));
-            postData.Add(new KeyValuePair<string, string>("combustivel", model.Fuel.Id.ToString()));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("idmodelo", model.Id.ToString()));
+            //postData.Add(new KeyValuePair<string, string>("modelo", model.Description));
+            //postData.Add(new KeyValuePair<string, string>("marca", model.Brand.Id.ToString()));
+            //postData.Add(new KeyValuePair<string, string>("combustivel", model.Fuel.Id.ToString()));
 
-            var content = new FormUrlEncodedContent(postData);
+            //var content = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, content);
+            //var content2 = await result.Content.ReadAsStringAsync();
+
+            //return content2;
+            var url = GetUrl(UrlMethodType.UpdateWebModel);
+
+
+            var jsontxt = MapperWeb.ToJson(model);
 
             var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
-
-            return content2;
+            return content;
         }
 
         public async Task<string> UpdateTypology(Typology typology)
         {
-            var url = GetUrl(UrlMethodType.UpdateTypology);
+            //var url = GetUrl(UrlMethodType.UpdateTypology);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("idtipologia", typology.Id.ToString()));
-            postData.Add(new KeyValuePair<string, string>("tipologia", typology.Description));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("idtipologia", typology.Id.ToString()));
+            //postData.Add(new KeyValuePair<string, string>("tipologia", typology.Description));
 
-            var content = new FormUrlEncodedContent(postData);
+            //var content = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, content);
+            //var content2 = await result.Content.ReadAsStringAsync();
+
+            //return content2;
+            var url = GetUrl(UrlMethodType.UpdateWebTypology);
+
+
+            var jsontxt = MapperWeb.ToJson(typology);
 
             var client = new HttpClient();
+            var content = await PostAsyncWeb(url, jsontxt);
 
-            var result = await client.PostAsync(url, content);
-            var content2 = await result.Content.ReadAsStringAsync();
-
-            return content2;
+            return content;
         }
 
         public async Task<string> ChangeBrandState(Brand brand)

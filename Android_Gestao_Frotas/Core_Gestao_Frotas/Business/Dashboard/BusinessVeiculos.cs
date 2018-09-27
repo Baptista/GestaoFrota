@@ -29,8 +29,11 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             IRepositoryBrand repositoryBrand = new RepositoryBrand();
 
             var brandsJson = await serviceVehicle.GetBrands();
-            var brands2 = JsonConvert.DeserializeObject<List<BrandPersistence>>(brandsJson);
-            var brandResult = await repositoryBrand.InsertAll(brands2);
+            //var brands2 = JsonConvert.DeserializeObject<List<BrandPersistence>>(brandsJson);
+            var brands2 = JsonConvert.DeserializeObject<List<WebBrand>>(brandsJson);
+            var brands3 = MapperWeb.WebBrandListToPersistence(brands2);
+
+            var brandResult = await repositoryBrand.InsertAll(brands3);
             var brands = await repositoryBrand.GetAll();
 
             return brands;
@@ -52,8 +55,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             else
             {
                 var modelsJson = await serviceVehicle.GetModels();
-                var models2 = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelsJson);
-                var modelsResult = await repositoryModel.InsertAll(models2);
+                var models2 = JsonConvert.DeserializeObject<List<WebModel>>(modelsJson);
+                var models3 = MapperWeb.WebModelListToPersistence(models2);
+                //var models2 = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelsJson);
+                var modelsResult = await repositoryModel.InsertAll(models3);
                 models = await repositoryModel.GetAll();
             }
             
@@ -86,8 +91,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             else
             {
                 var typologysJson = await serviceVehicle.GetTypologys();
-                var typologys2 = JsonConvert.DeserializeObject<List<TypologyPersistence>>(typologysJson);
-                var typologysResult = await repositoryTypologys.InsertAll(typologys2);
+                var typologys2 = JsonConvert.DeserializeObject<List<WebTypology>>(typologysJson);
+                var typologys3 = MapperWeb.WebTypologyListToPersistence(typologys2);
+                //var typologys2 = JsonConvert.DeserializeObject<List<TypologyPersistence>>(typologysJson);
+                var typologysResult = await repositoryTypologys.InsertAll(typologys3);
                 typologies = await repositoryTypologys.GetAll();
             }
 
@@ -109,13 +116,17 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             if (usePersistence)
             {
                 vehicles = await repositoryVehicles.GetAll();
+                vehicles = vehicles.Where(x => x.Id != 0).ToList();
             }
             else
             {
                 var vehiclesJson = await serviceVehicle.GetVehicles();
-                var vehiclesPersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehiclesJson);
-                var vehiclesResult = await repositoryVehicles.InsertAll(vehiclesPersistence);
-                vehicles = MapperVehicle.ToModel(vehiclesPersistence);
+                //var vehiclesPersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehiclesJson);
+                var vehiclesPersistence = JsonConvert.DeserializeObject<List<WebVehicle>>(vehiclesJson);
+                var vehiclesPersistence2 = MapperWeb.WebVehicleListToPersistence(vehiclesPersistence);
+
+                var vehiclesResult = await repositoryVehicles.InsertAll(vehiclesPersistence2);
+                vehicles = MapperVehicle.ToModel(vehiclesPersistence2);
             }
 
             foreach (var vehicle in vehicles)
@@ -153,8 +164,11 @@ namespace Core_Gestao_Frotas.Business.Dashboard
             else
             {
                 var fuelsJson = await serviceVehicle.GetFuels();
-                var fuels2 = JsonConvert.DeserializeObject<List<FuelPersistence>>(fuelsJson);
-                var fuelsResult = await repositoryFuels.InsertAll(fuels2);
+                //var fuels2 = JsonConvert.DeserializeObject<List<FuelPersistence>>(fuelsJson);
+                var fuels2 = JsonConvert.DeserializeObject<List<WebFuel>>(fuelsJson);
+                var fuels3 = MapperWeb.WebFuelToPersistence(fuels2);
+
+                var fuelsResult = await repositoryFuels.InsertAll(fuels3);
                 fuels = await repositoryFuels.GetAll();
             }
 
@@ -168,8 +182,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var addbrand = await serviceVehicle.InsertBrand(brand);
 
-            var brandPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(addbrand);
-            var result = await repositoryBrand.Insert(brandPersistence[0]);
+            var brandWeb = JsonConvert.DeserializeObject<WebBrand>(addbrand);
+            var brandPersistence = MapperWeb.WebBrandToPersistence(brandWeb);
+            //var brandPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(addbrand);
+            var result = await repositoryBrand.Insert(brandPersistence);
 
             return result == 1 ? true : false;
         }
@@ -181,8 +197,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var addmodel = await serviceVehicle.InsertModel(model);
 
-            var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(addmodel);
-            var result = await repositoryModel.Insert(modelPersistence[0]);
+            var modelWeb = JsonConvert.DeserializeObject<WebModel>(addmodel);
+            var modelPersistence = MapperWeb.WebModelToPersistence(modelWeb);
+            //var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(addmodel);
+            var result = await repositoryModel.Insert(modelPersistence);
 
             return result == 1 ? true : false;
         }
@@ -194,8 +212,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var addtypology = await serviceVehicle.InsertTypology(typology);
 
-            var typologyPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(addtypology);
-            var result = await repositoryTypology.Insert(typologyPersistence[0]);
+            var typologyWeb = JsonConvert.DeserializeObject<WebTypology>(addtypology);
+            var typologyPersistence = MapperWeb.WebTypologyToPersistence(typologyWeb);
+            //var typologyPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(addtypology);
+            var result = await repositoryTypology.Insert(typologyPersistence);
 
             return result == 1 ? true : false;
         }
@@ -207,8 +227,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var updatebrand = await serviceVehicle.UpdateBrand(brand);
 
-            var brandPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(updatebrand);
-            var result = await repositoryBrand.Update(brandPersistence[0]);
+            var brandWeb = JsonConvert.DeserializeObject<WebBrand>(updatebrand);
+            var brandPersistence = MapperWeb.WebBrandToPersistence(brandWeb);
+            //var brandPersistence = JsonConvert.DeserializeObject<List<BrandPersistence>>(updatebrand);
+            var result = await repositoryBrand.Update(brandPersistence);
 
             return result == 1 ? true : false;
         }
@@ -220,8 +242,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var updatemodel = await serviceVehicle.UpdateModel(model);
 
-            var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(updatemodel);
-            var result = await repositoryModel.Update(modelPersistence[0]);
+            var modelWeb = JsonConvert.DeserializeObject<WebModel>(updatemodel);
+            var modelPersistence = MapperWeb.WebModelToPersistence(modelWeb);
+            //var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(updatemodel);
+            var result = await repositoryModel.Update(modelPersistence);
 
             return result == 1 ? true : false;
         }
@@ -233,8 +257,10 @@ namespace Core_Gestao_Frotas.Business.Dashboard
 
             var updatetypology = await serviceVehicle.UpdateTypology(typology);
 
-            var typologyPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(updatetypology);
-            var result = await repositoryTypology.Update(typologyPersistence[0]);
+            var typologyWeb = JsonConvert.DeserializeObject<WebTypology>(updatetypology);
+            var typologyPersistence = MapperWeb.WebTypologyToPersistence(typologyWeb);
+            //var typologyPersistence = JsonConvert.DeserializeObject<List<TypologyPersistence>>(updatetypology);
+            var result = await repositoryTypology.Update(typologyPersistence);
 
             return result == 1 ? true : false;
         }

@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using RestFleet.Mappers;
 using RestFleet.Models;
+using static RestFleet.Mappers.MapperJson;
 
 namespace RestFleet.Controllers
 {
@@ -83,6 +85,45 @@ namespace RestFleet.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = modelo.IdModelo }, modelo);
+        }
+
+        // POST: api/Modeloes/AdicionarModelo
+        [Route("api/Modeloes/AdicionarModelo")]
+        [ResponseType(typeof(Modelo))]
+        public IHttpActionResult AdicionarModelo(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<ModelJson>(jsontxt);
+
+            var modelo = MapperApp.ModeloAppToRest(a);
+
+            db.Modeloes.Add(modelo);
+            db.SaveChanges();
+
+            return Ok(db.Modeloes.OrderByDescending(u => u.IdModelo).FirstOrDefault());
+            //return CreatedAtRoute("DefaultApi", new { id = a.Id }, a);
+        }
+
+        // POST: api/Modeloes/EditarModelo
+        [Route("api/Modeloes/EditarModelo")]
+        [ResponseType(typeof(Modelo))]
+        public IHttpActionResult EditarModelo(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<ModelJson>(jsontxt);
+
+            var modelo = MapperApp.ModeloAppToRest(a);
+
+            //var result = db.Modeloes.SingleOrDefault(b => b.IdModelo == modelo.IdModelo);
+            //if (result != null)
+            //{
+            //    result = modelo;
+            //    db.SaveChanges();
+            //}
+            db.spAlteraModelo(modelo.IdModelo, modelo.IdMarca, modelo.Descricao, modelo.IdCombustivel);
+
+            return Ok(db.Modeloes.SingleOrDefault(b => b.IdModelo == modelo.IdModelo));
+            //return CreatedAtRoute("DefaultApi", new { id = a.Id }, a);
         }
 
         // DELETE: api/Modeloes/5

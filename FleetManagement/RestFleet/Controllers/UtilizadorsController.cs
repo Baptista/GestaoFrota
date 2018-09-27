@@ -8,7 +8,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Newtonsoft.Json;
+using RestFleet.Mappers;
 using RestFleet.Models;
+using static RestFleet.Mappers.MapperJson;
 
 namespace RestFleet.Controllers
 {
@@ -83,6 +86,51 @@ namespace RestFleet.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = utilizador.IdUtilizador }, utilizador);
+        }
+
+        // POST: api/Utilizadors/AdicionarUtilizador
+        [Route("api/Utilizadors/AdicionarUtilizador")]
+        [ResponseType(typeof(Utilizador))]
+        public IHttpActionResult AdicionarUtilizador(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<UserJson>(jsontxt);
+
+            var utilizador = MapperApp.UtilizadorAppToRest(a);
+
+            db.Utilizadors.Add(utilizador);
+            db.SaveChanges();
+
+            return Ok(db.Utilizadors.OrderByDescending(u => u.IdUtilizador).FirstOrDefault());
+            //return CreatedAtRoute("DefaultApi", new { id = utilizador.IdUtilizador }, utilizador);
+        }
+
+        // POST: api/Utilizadors/login
+        //[ResponseType(typeof(Utilizador))]
+        [Route("api/Utilizadors/Login")]
+        [HttpPost]
+        public IHttpActionResult Login(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<LoginJson>(jsontxt);
+
+            Utilizador utilizador = db.Utilizadors.FirstOrDefault(x => x.Username == a.User && x.Password == a.Password);
+
+            if (utilizador == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(utilizador);
+        }
+
+        // GET: api/Utilizadors/passworddefault
+        [Route("api/Utilizadors/passworddefault")]
+        [HttpGet]
+        [ResponseType(typeof(string))]
+        public IHttpActionResult passworddefault()
+        {
+            return Ok(db.spObtemPasswordDefault());
         }
 
         // DELETE: api/Utilizadors/5

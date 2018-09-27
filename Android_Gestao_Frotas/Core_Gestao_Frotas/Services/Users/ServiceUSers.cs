@@ -1,4 +1,5 @@
 ﻿using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
 using Core_Gestao_Frotas.Services.Interfaces;
 using Core_Gestao_Frotas.Services.Models;
 using Newtonsoft.Json;
@@ -33,26 +34,36 @@ namespace Core_Gestao_Frotas.Services.Users
 
         public async Task<string> CreateUser(User user)
         {
-            var url = GetUrl(UrlMethodType.AddUser);
+            //var url = GetUrl(UrlMethodType.AddUser);
 
-            var postData = new List<KeyValuePair<string, string>>();
-            postData.Add(new KeyValuePair<string, string>("username", $"{user.Username}"));
-            postData.Add(new KeyValuePair<string, string>("perfil", $"{user.Profile.Id}"));
-            postData.Add(new KeyValuePair<string, string>("nome", $"{user.Name}"));
+            //var postData = new List<KeyValuePair<string, string>>();
+            //postData.Add(new KeyValuePair<string, string>("username", $"{user.Username}"));
+            //postData.Add(new KeyValuePair<string, string>("perfil", $"{user.Profile.Id}"));
+            //postData.Add(new KeyValuePair<string, string>("nome", $"{user.Name}"));
 
-            var encodedContent = new FormUrlEncodedContent(postData);
+            //var encodedContent = new FormUrlEncodedContent(postData);
+
+            //var client = new HttpClient();
+
+            //var result = await client.PostAsync(url, encodedContent);
+            //var content = await result.Content.ReadAsStringAsync();
+
+            //return content;
+
+            var url = GetUrl(UrlMethodType.AddWebUser);
+
+
+            var jsontxt = MapperWeb.ToJson(user);
 
             var client = new HttpClient();
-
-            var result = await client.PostAsync(url, encodedContent);
-            var content = await result.Content.ReadAsStringAsync();
+            var content = await PostAsyncWeb(url, jsontxt);
 
             return content;
         }
 
         public async Task<string> GetProfiles()
         {
-            var url = GetUrl(UrlMethodType.GetProfiles);
+            var url = GetUrl(UrlMethodType.GetWebProfiles);
 
             var client = new HttpClient();
 
@@ -76,7 +87,7 @@ namespace Core_Gestao_Frotas.Services.Users
 
         public async Task<string> GetUsers()
         {
-            var url = GetUrl(UrlMethodType.GetUsers);
+            var url = GetUrl(UrlMethodType.GetWebUsers);
 
             var client = new HttpClient();
 

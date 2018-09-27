@@ -16,7 +16,8 @@ namespace Core_Gestao_Frotas.Services.Splash
     {
         public async Task<string> GetConfigutations()
         {
-            var url = GetUrl(UrlMethodType.GetConfigurations);
+            //var url = GetUrl(UrlMethodType.GetConfigurations);
+            var url = GetUrl(UrlMethodType.GetWebConfigurations);
 
             var client = new HttpClient();
 
@@ -28,7 +29,8 @@ namespace Core_Gestao_Frotas.Services.Splash
 
         public async Task<string> GetPermissions()
         {
-            var url = GetUrl(UrlMethodType.GetPermissions);
+            //var url = GetUrl(UrlMethodType.GetPermissions);
+            var url = GetUrl(UrlMethodType.GetWebPermissions);
 
             var client = new HttpClient();
 
@@ -40,7 +42,8 @@ namespace Core_Gestao_Frotas.Services.Splash
 
         public async Task<string> GetProfilePermissions()
         {
-            var url = GetUrl(UrlMethodType.GetProfilePermissions);
+            //var url = GetUrl(UrlMethodType.GetProfilePermissions);
+            var url = GetUrl(UrlMethodType.GetWebProfilePermissions);
 
             var client = new HttpClient();
 
@@ -52,7 +55,8 @@ namespace Core_Gestao_Frotas.Services.Splash
 
         public async Task<string> GetProfiles()
         {
-            var url = GetUrl(UrlMethodType.GetProfiles);
+            //var url = GetUrl(UrlMethodType.GetProfiles);
+            var url = GetUrl(UrlMethodType.GetWebProfiles);
 
             var client = new HttpClient();
 

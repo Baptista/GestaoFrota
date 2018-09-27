@@ -1,5 +1,6 @@
 ﻿using Core_Gestao_Frotas.Business.Interfaces;
 using Core_Gestao_Frotas.Business.Models;
+using Core_Gestao_Frotas.Mappers;
 using Core_Gestao_Frotas.Persistence.Interfaces;
 using Core_Gestao_Frotas.Persistence.Models;
 using Core_Gestao_Frotas.Persistence.Repositories.Brands;
@@ -66,9 +67,12 @@ namespace Core_Gestao_Frotas.Business.ModelInfo
 
             var modelJson = await serviceModelInfo.NewModel(model);
 
-            var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelJson);
+            var modelWeb = JsonConvert.DeserializeObject<WebModel>(modelJson);
+            var modelPersistence = MapperWeb.WebModelToPersistence(modelWeb);
 
-            var result = await repositoryModel.Insert(modelPersistence[0]);
+            //var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelJson);
+
+            var result = await repositoryModel.Insert(modelPersistence);
 
             return true;
         }
@@ -80,9 +84,12 @@ namespace Core_Gestao_Frotas.Business.ModelInfo
 
             var modelJson = await serviceModelInfo.UpdateModel(model);
 
-            var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelJson);
+            var modelWeb = JsonConvert.DeserializeObject<WebModel>(modelJson);
+            var modelPersistence = MapperWeb.WebModelToPersistence(modelWeb);
 
-            var result = await repositoryModel.Update(modelPersistence[0]);
+            //var modelPersistence = JsonConvert.DeserializeObject<List<ModelPersistence>>(modelJson);
+
+            var result = await repositoryModel.Update(modelPersistence);
 
             if (changeState)
                 await ChangeModelState(model);

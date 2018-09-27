@@ -8,7 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using RestFleet.Mappers;
 using RestFleet.Models;
+using static RestFleet.Mappers.MapperJson;
 
 namespace RestFleet.Controllers
 {
@@ -83,6 +85,39 @@ namespace RestFleet.Controllers
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = veiculo.IdVeiculo }, veiculo);
+        }
+
+        // POST: api/Veiculoes/AdicionarVeiculo
+        [Route("api/Veiculoes/AdicionarVeiculo")]
+        [ResponseType(typeof(Veiculo))]
+        public IHttpActionResult AdicionarVeiculo(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<VehicleJson>(jsontxt);
+
+            var veiculo = MapperApp.VeiculoAppToRest(a);
+
+            db.Veiculoes.Add(veiculo);
+            db.SaveChanges();
+
+            return Ok(db.Veiculoes.OrderByDescending(u => u.IdVeiculo).FirstOrDefault());
+            //return CreatedAtRoute("DefaultApi", new { id = veiculo.IdVeiculo }, veiculo);
+        }
+
+        // POST: api/Veiculoes/EditarVeiculo
+        [Route("api/Veiculoes/EditarVeiculo")]
+        [ResponseType(typeof(Veiculo))]
+        public IHttpActionResult EditarVeiculo(HttpRequestMessage data)
+        {
+            var jsontxt = data.Content.ReadAsStringAsync().Result;
+            var a = MapperJson.FromJson<VehicleJson>(jsontxt);
+
+            var veiculo = MapperApp.VeiculoAppToRest(a);
+
+            db.spAlteraVeiculo(veiculo.IdVeiculo, veiculo.IdModelo, veiculo.IdTipologia, veiculo.Matricula, veiculo.IdUtilizador, veiculo.KmsIniciais, veiculo.KmsContrato);
+
+            return Ok(db.Veiculoes.SingleOrDefault(b => b.IdVeiculo == veiculo.IdVeiculo));
+            //return CreatedAtRoute("DefaultApi", new { id = veiculo.IdVeiculo }, veiculo);
         }
 
         // DELETE: api/Veiculoes/5

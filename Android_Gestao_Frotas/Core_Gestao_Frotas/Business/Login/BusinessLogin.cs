@@ -46,8 +46,11 @@ namespace Core_Gestao_Frotas.Business.Login
             {
                 try
                 {
-                    var userPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(userJson);
-                    var user = MapperUser.ToModel(userPersistence[0]);
+                    var webUser = JsonConvert.DeserializeObject<WebUser>(userJson);
+                    //var userPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(userJson);
+                    //var user = MapperUser.ToModel(userPersistence[0]);
+                    var userPersistence = MapperWeb.WebUserToPersistence(webUser);
+                    var user = MapperUser.ToModel(userPersistence);
 
                     if (user.Profile.IsIncomplete)
                     {
@@ -119,8 +122,10 @@ namespace Core_Gestao_Frotas.Business.Login
 
                 var usersJson = await serviceLogin.GetUsers();
 
-                var UsersPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(usersJson);
-                
+                var UsersWeb = JsonConvert.DeserializeObject<List<WebUser>>(usersJson);
+                //var UsersPersistence = JsonConvert.DeserializeObject<List<UserPersistence>>(usersJson);
+                var UsersPersistence = MapperWeb.WebUserListToPersistence(UsersWeb);
+
                 var usersResult = await repositoryUser.InsertAll(UsersPersistence);
 
                 return true;

@@ -10,6 +10,42 @@ namespace Core_Gestao_Frotas.Services
     public class BaseService
     {
         public const string ApiURL = "http://213.32.71.49/";
+        public const string WebApiURL = "http://10.10.12.20:8080/";
+
+        public const string GetWebConfigurationsURL = "api/Configuracaos";
+        public const string GetWebProfilesURL = "api/Perfils";
+        public const string GetWebProfilePermissionsURL = "api/Perfil_Permissao";
+        public const string GetWebPermissionsURL = "api/Permissaos";
+        public const string GetWebLoginIdURL = "api/utilizadors/login";
+        public const string GetWebUsersURL = "api/Utilizadors";
+        public const string GetWebVehiclesURL = "api/Veiculoes";
+        public const string GetWebBrandsURL = "api/Marcas";
+        public const string GetWebModelsURL = "api/Modeloes";
+        public const string GetWebTypologysURL = "api/Tipologias";
+        public const string GetWebFuelsURL = "api/Combustivels";
+        public const string GetWebVehicleHistoryURL = "api/Veiculo_Entrega";
+        public const string GetWebDamageVehicleURL = "api/Danos_Veiculo";
+        public const string GetWebDamageVehicleDocumentURL = "api/Danos_Veiculo_Comprovativo";
+        public const string GetWebRequestJustificationTypesURL = "api/Tipo_Justificacao_Pedido";
+        public const string GetWebRequestStatesURL = "api/Estado_Pedido_Marcacao";
+        public const string GetWebRequestsURL = "api/Pedido_Marcacao";
+        public const string GetWebRequestJustificationsURL = "api/Justificacao_Pedido_Marcacao";
+        public const string GetWebRequestHistoriesURL = "api/Pedido_Marcacao_Historico";
+
+        public const string GetWebRequestsForApprovalURL = "api/Pedido_Marcacao_Historico/getpedidomarcacaopendente";
+        public const string GetWebRequestsUnavailableURL = "api/Pedido_Marcacao_Historico/getpedidosdisponibilizar";
+        public const string GetWebRequestsActiveURL = "api/Pedido_Marcacao_Historico/getpedidomarcacaoaprovado";
+        public const string GetWebRequestsCursoURL = "api/Pedido_Marcacao_Historico/getpedidomarcacaoemcurso";
+
+        public const string InsertWebBrandURL = "api/Marcas/AdicionarMarca";
+        public const string InsertWebModelURL = "api/Modeloes/AdicionarModelo";
+        public const string InsertWebTypologyURL = "api/Tipologias/AdicionarTipologia";
+        public const string AddWebVehicleURL = "api/Veiculoes/AdicionarVeiculo";
+        public const string AddWebUserURL = "api/Utilizadors/AdicionarUtilizador";
+
+        public const string UpdateWebBrandURL = "api/Marcas/EditarMarca";
+        public const string UpdateWebModelURL = "api/Modeloes/EditarModelo";
+        public const string UpdateWebTypologyURL = "api/Tipologias/EditarTipologia";
 
         public const string GetConfigurationsURL = "frota/example/getconfiguracao";
         public const string GetProfilesURL = "frota/example/getperfil";
@@ -146,7 +182,38 @@ namespace Core_Gestao_Frotas.Services
             CancelRequest = 55,
             ChangeDefaultPassword = 56,
             AddJustification = 57,
-            ExisteSobreposicao = 58
+            ExisteSobreposicao = 58,
+            GetWebConfigurations = 59,
+            GetWebProfiles = 60,
+            GetWebBrands = 61,
+            GetWebProfilePermissions = 62,
+            GetWebPermissions = 63,
+            GetWebLoginId = 64,
+            GetWebUsers = 65,
+            GetWebVehicles = 66,
+            GetWebModels = 67,
+            GetWebTypologys = 68,
+            GetWebFuels = 69,
+            GetWebVehicleHistory = 70,
+            GetWebDamageVehicle = 71,
+            GetWebDamageVehicleDocument = 72,
+            GetWebRequestJustificationTypes = 73,
+            GetWebRequestStates = 74,
+            GetWebRequests = 75,
+            GetWebRequestJustifications = 76,
+            GetWebRequestHistories = 77,
+            GetWebRequestsForApproval = 78,
+            GetWebRequestsUnavailable = 79,
+            GetWebRequestsActive = 80,
+            GetWebRequestsCurso = 81,
+            InsertWebBrand = 82,
+            InsertWebModel = 83,
+            InsertWebTypology = 84,
+            AddWebVehicle = 85,
+            AddWebUser = 86,
+            UpdateWebBrand = 87,
+            UpdateWebModel = 88,
+            UpdateWebTypology = 89
         }
 
         public string GetUrl(UrlMethodType method = UrlMethodType.Base)
@@ -332,6 +399,99 @@ namespace Core_Gestao_Frotas.Services
                 case UrlMethodType.ExisteSobreposicao:
                     url = ApiURL + existesobreposicaoURL;
                     break;
+                case UrlMethodType.GetWebConfigurations:
+                    url = WebApiURL + GetWebConfigurationsURL;
+                    break;
+                case UrlMethodType.GetWebProfiles:
+                    url = WebApiURL + GetWebProfilesURL;
+                    break;
+                case UrlMethodType.GetWebProfilePermissions:
+                    url = WebApiURL + GetWebProfilePermissionsURL;
+                    break;
+                case UrlMethodType.GetWebPermissions:
+                    url = WebApiURL + GetWebPermissionsURL;
+                    break;
+                case UrlMethodType.GetWebLoginId:
+                    url = WebApiURL + GetWebLoginIdURL;
+                    break;
+                case UrlMethodType.GetWebUsers:
+                    url = WebApiURL + GetWebUsersURL;
+                    break;
+                case UrlMethodType.GetWebVehicles:
+                    url = WebApiURL + GetWebVehiclesURL;
+                    break;
+                case UrlMethodType.GetWebBrands:
+                    url = WebApiURL + GetWebBrandsURL;
+                    break;
+                case UrlMethodType.GetWebModels:
+                    url = WebApiURL + GetWebModelsURL;
+                    break;
+                case UrlMethodType.GetWebTypologys:
+                    url = WebApiURL + GetWebTypologysURL;
+                    break;
+                case UrlMethodType.GetWebFuels:
+                    url = WebApiURL + GetWebFuelsURL;
+                    break;
+                case UrlMethodType.GetWebVehicleHistory:
+                    url = WebApiURL + GetWebVehicleHistoryURL;
+                    break;
+                case UrlMethodType.GetWebDamageVehicle:
+                    url = WebApiURL + GetWebDamageVehicleURL;
+                    break;
+                case UrlMethodType.GetWebDamageVehicleDocument:
+                    url = WebApiURL + GetWebDamageVehicleDocumentURL;
+                    break;
+                case UrlMethodType.GetWebRequestJustificationTypes:
+                    url = WebApiURL + GetWebRequestJustificationTypesURL;
+                    break;
+                case UrlMethodType.GetWebRequestStates:
+                    url = WebApiURL + GetWebRequestStatesURL;
+                    break;
+                case UrlMethodType.GetWebRequests:
+                    url = WebApiURL + GetWebRequestsURL;
+                    break;
+                case UrlMethodType.GetWebRequestJustifications:
+                    url = WebApiURL + GetWebRequestJustificationsURL;
+                    break;
+                case UrlMethodType.GetWebRequestHistories:
+                    url = WebApiURL + GetWebRequestHistoriesURL;
+                    break;
+                case UrlMethodType.GetWebRequestsForApproval:
+                    url = WebApiURL + GetWebRequestsForApprovalURL;
+                    break;
+                case UrlMethodType.GetWebRequestsUnavailable:
+                    url = WebApiURL + GetWebRequestsUnavailableURL;
+                    break;
+                case UrlMethodType.GetWebRequestsActive:
+                    url = WebApiURL + GetWebRequestsActiveURL;
+                    break;
+                case UrlMethodType.GetWebRequestsCurso:
+                    url = WebApiURL + GetWebRequestsCursoURL;
+                    break;
+                case UrlMethodType.InsertWebBrand:
+                    url = WebApiURL + InsertWebBrandURL;
+                    break;
+                case UrlMethodType.InsertWebModel:
+                    url = WebApiURL + InsertWebModelURL;
+                    break;
+                case UrlMethodType.InsertWebTypology:
+                    url = WebApiURL + InsertWebTypologyURL;
+                    break;
+                case UrlMethodType.AddWebVehicle:
+                    url = WebApiURL + AddWebVehicleURL;
+                    break;
+                case UrlMethodType.AddWebUser:
+                    url = WebApiURL + AddWebUserURL;
+                    break;
+                case UrlMethodType.UpdateWebBrand:
+                    url = WebApiURL + UpdateWebBrandURL;
+                    break;
+                case UrlMethodType.UpdateWebModel:
+                    url = WebApiURL + UpdateWebModelURL;
+                    break;
+                case UrlMethodType.UpdateWebTypology:
+                    url = WebApiURL + UpdateWebTypologyURL;
+                    break;
             }
 
             return url;
@@ -358,5 +518,25 @@ namespace Core_Gestao_Frotas.Services
 
             return content;
         }
+
+        public async Task<string> PostAsyncWeb(string url, string jsondata)
+        {
+            try
+            {
+                
+                HttpClient client = new HttpClient();
+                var content = new StringContent(jsondata, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response;
+                response = await client.PostAsync(url, content);
+
+
+                return await response.Content.ReadAsStringAsync();
+            }catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

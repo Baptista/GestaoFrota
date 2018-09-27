@@ -115,11 +115,16 @@ namespace Core_Gestao_Frotas.Business.VehicleInfo
             IServiceVehicleInfo serviceVehicleInfo = new ServiceVehicleInfo();
             IRepositoryVehicle repositoryVehicle = new RepositoryVehicle();
 
+            vehicle.Active = true;
+            vehicle.Available = true;
+
             var vehicleJson = await serviceVehicleInfo.NewVehicle(vehicle);
 
-            var vehiclePersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehicleJson);
+            var vehicleWeb = JsonConvert.DeserializeObject<WebVehicle>(vehicleJson);
+            var vehiclePersistence = MapperWeb.WebVehicleToPersistence(vehicleWeb);
+            //var vehiclePersistence = JsonConvert.DeserializeObject<List<VehiclePersistence>>(vehicleJson);
 
-            var result = await repositoryVehicle.Insert(vehiclePersistence[0]);
+            var result = await repositoryVehicle.Insert(vehiclePersistence);
 
             return true;
         }

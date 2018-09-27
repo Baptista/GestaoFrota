@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Core_Gestao_Frotas.Services.Dashboard
 {
@@ -13,7 +14,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
     {
         public async Task<string> GetBrands()
         {
-            var url = GetUrl(UrlMethodType.GetBrands);
+            //var url = GetUrl(UrlMethodType.GetBrands);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebBrands);
             var content = await GetAsync(url);
 
             return content;
@@ -21,7 +24,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetDamagesVehicle()
         {
-            var url = GetUrl(UrlMethodType.GetDamageVehicle);
+            //var url = GetUrl(UrlMethodType.GetDamageVehicle);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebDamageVehicle);
             var content = await GetAsync(url);
 
             return content;
@@ -29,7 +34,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetDamageVehicleDocuments()
         {
-            var url = GetUrl(UrlMethodType.GetDamageVehicleDocument);
+            //var url = GetUrl(UrlMethodType.GetDamageVehicleDocument);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebDamageVehicleDocument);
             var content = await GetAsync(url);
 
             return content;
@@ -37,7 +44,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetFuels()
         {
-            var url = GetUrl(UrlMethodType.GetFuels);
+            //var url = GetUrl(UrlMethodType.GetFuels);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebFuels);
             var content = await GetAsync(url);
 
             return content;
@@ -45,7 +54,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetModels()
         {
-            var url = GetUrl(UrlMethodType.GetModels);
+            //var url = GetUrl(UrlMethodType.GetModels);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebModels);
             var content = await GetAsync(url);
 
             return content;
@@ -53,7 +64,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetTypologies()
         {
-            var url = GetUrl(UrlMethodType.GetTypologies);
+            //var url = GetUrl(UrlMethodType.GetTypologies);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebTypologys);
             var content = await GetAsync(url);
 
             return content;
@@ -61,7 +74,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetVehicles()
         {
-            var url = GetUrl(UrlMethodType.GetVehicles);
+            //var url = GetUrl(UrlMethodType.GetVehicles);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebVehicles);
             var content = await GetAsync(url);
 
             return content;
@@ -69,7 +84,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetVehiclesHistory()
         {
-            var url = GetUrl(UrlMethodType.GetVehicleHistory);
+            //var url = GetUrl(UrlMethodType.GetVehicleHistory);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebVehicleHistory);
             var content = await GetAsync(url);
 
             return content;
@@ -77,7 +94,7 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsActiveAll()
         {
-            var url = GetUrl(UrlMethodType.GetRequestsActive);
+            var url = GetUrl(UrlMethodType.GetWebRequestsActive);
             var content = await GetAsync(url);
 
             return content;
@@ -85,7 +102,7 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsForApproval()
         {
-            var url = GetUrl(UrlMethodType.GetRequestsForApproval);
+            var url = GetUrl(UrlMethodType.GetWebRequestsForApproval);
             var content = await GetAsync(url);
 
             return content;
@@ -93,7 +110,7 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsUnavailable()
         {
-            var url = GetUrl(UrlMethodType.GetRequestsUnavailable);
+            var url = GetUrl(UrlMethodType.GetWebRequestsUnavailable);
             var content = await GetAsync(url);
 
             return content;
@@ -101,8 +118,8 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsCurso(User user)
         {
-            var url = GetUrl(UrlMethodType.GetRequestsCurso);
-            url = url + "/" + user.Id;
+            var url = GetUrl(UrlMethodType.GetWebRequestsCurso);
+            url = url + "?id=" + user.Id;
             var content = await GetAsync(url);
 
             return content;
@@ -110,8 +127,8 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsActiveUser(User user)
         {
-            var url = GetUrl(UrlMethodType.GetRequestsActive);
-            url = url + "/" + user.Id;
+            var url = GetUrl(UrlMethodType.GetWebRequestsActive);
+            url = url + "?id=" + user.Id;
             var content = await GetAsync(url);
 
             return content;
@@ -119,8 +136,8 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestsActiveUserVehicle(User user, Vehicle vehicle)
         {
-            var url = GetUrl(UrlMethodType.GetRequestsActive);
-            url = url + "/" + user.Id + "/" + vehicle.Id;
+            var url = GetUrl(UrlMethodType.GetWebRequestsActive);
+            url = url + "?id=" + user.Id + "&idveiculo=" + vehicle.Id;
             var content = await GetAsync(url);
 
             return content;
@@ -141,7 +158,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestJustificationTypes()
         {
-            var url = GetUrl(UrlMethodType.GetRequestJustificationTypes);
+            //var url = GetUrl(UrlMethodType.GetRequestJustificationTypes);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebRequestJustificationTypes);
             var content = await GetAsync(url);
 
             return content;
@@ -149,7 +168,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestStates()
         {
-            var url = GetUrl(UrlMethodType.GetRequestStates);
+            //var url = GetUrl(UrlMethodType.GetRequestStates);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebRequestStates);
             var content = await GetAsync(url);
 
             return content;
@@ -157,7 +178,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequests()
         {
-            var url = GetUrl(UrlMethodType.GetRequests);
+            //var url = GetUrl(UrlMethodType.GetRequests);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebRequests);
             var content = await GetAsync(url);
 
             return content;
@@ -165,7 +188,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestJustifications()
         {
-            var url = GetUrl(UrlMethodType.GetRequestJustifications);
+            //var url = GetUrl(UrlMethodType.GetRequestJustifications);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebRequestJustifications);
             var content = await GetAsync(url);
 
             return content;
@@ -173,7 +198,9 @@ namespace Core_Gestao_Frotas.Services.Dashboard
 
         public async Task<string> GetRequestHistories()
         {
-            var url = GetUrl(UrlMethodType.GetRequestHistories);
+            //var url = GetUrl(UrlMethodType.GetRequestHistories);
+            //var content = await GetAsync(url);
+            var url = GetUrl(UrlMethodType.GetWebRequestHistories);
             var content = await GetAsync(url);
 
             return content;
